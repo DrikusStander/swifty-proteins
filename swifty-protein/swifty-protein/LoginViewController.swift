@@ -14,7 +14,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var authBtn: UIButton!
     @IBOutlet weak var usernameInpt: UITextField!
     @IBOutlet weak var pwdInpt: UITextField!
-    var success : Bool = false
     let myContext = LAContext()
     let myReasonString = "Biometric Auth testing"
     let username = "username"
@@ -23,7 +22,9 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.baseController = self
+        delegate.navController = self.navigationController
         let image = UIImage(named: "backGround")
         let imageView = UIImageView(frame: self.view.bounds)
         imageView.contentMode = UIView.ContentMode.scaleAspectFill
@@ -83,13 +84,10 @@ class LoginViewController: UIViewController {
                     success, evaluateError in
                     DispatchQueue.main.async {
                         if success{
-//                            self.successLabel.text = "Success!!"
                             self.segue()
                         }
                         else{
                             print(evaluateError)
-//                            self.successLabel.text = "Not Authenticated!!"
-                            self.success = false
                         }
                     }
                 })

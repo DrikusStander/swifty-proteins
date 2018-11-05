@@ -14,6 +14,9 @@
 		56A1AC4C2189F4B100A5FB52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A1AC4A2189F4B100A5FB52 /* LaunchScreen.storyboard */; };
 		56A1AC542189F8E500A5FB52 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A1AC532189F8E500A5FB52 /* Login.storyboard */; };
 		56A1AC562189F8F900A5FB52 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1AC552189F8F900A5FB52 /* LoginViewController.swift */; };
+		56AFFBDF2190416400F93723 /* LigandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AFFBDE2190416400F93723 /* LigandTableViewCell.swift */; };
+		56AFFBE1219043B400F93723 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AFFBE0219043B400F93723 /* data.swift */; };
+		56AFFBE5219044EC00F93723 /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 56AFFBE4219044EC00F93723 /* ligands.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,9 @@
 		56A1AC4D2189F4B100A5FB52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56A1AC532189F8E500A5FB52 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		56A1AC552189F8F900A5FB52 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		56AFFBDE2190416400F93723 /* LigandTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandTableViewCell.swift; sourceTree = "<group>"; };
+		56AFFBE0219043B400F93723 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
+		56AFFBE4219044EC00F93723 /* ligands.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,10 @@
 			children = (
 				56A1AC412189F49E00A5FB52 /* AppDelegate.swift */,
 				56A1AC432189F49E00A5FB52 /* ViewController.swift */,
+				56AFFBE0219043B400F93723 /* data.swift */,
 				56A1AC552189F8F900A5FB52 /* LoginViewController.swift */,
+				56AFFBE4219044EC00F93723 /* ligands.txt */,
+				56AFFBDE2190416400F93723 /* LigandTableViewCell.swift */,
 				56A1AC532189F8E500A5FB52 /* Login.storyboard */,
 				56A1AC452189F49E00A5FB52 /* Main.storyboard */,
 				56A1AC482189F4B100A5FB52 /* Assets.xcassets */,
@@ -129,6 +138,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56A1AC542189F8E500A5FB52 /* Login.storyboard in Resources */,
+				56AFFBE5219044EC00F93723 /* ligands.txt in Resources */,
 				56A1AC4C2189F4B100A5FB52 /* LaunchScreen.storyboard in Resources */,
 				56A1AC492189F4B100A5FB52 /* Assets.xcassets in Resources */,
 				56A1AC472189F49E00A5FB52 /* Main.storyboard in Resources */,
@@ -144,6 +154,8 @@
 			files = (
 				56A1AC562189F8F900A5FB52 /* LoginViewController.swift in Sources */,
 				56A1AC442189F49E00A5FB52 /* ViewController.swift in Sources */,
+				56AFFBDF2190416400F93723 /* LigandTableViewCell.swift in Sources */,
+				56AFFBE1219043B400F93723 /* data.swift in Sources */,
 				56A1AC422189F49E00A5FB52 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
