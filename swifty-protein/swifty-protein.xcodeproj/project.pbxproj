@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		567F816521943032007F115F /* SceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567F816421943032007F115F /* SceneViewController.swift */; };
 		56A1AC422189F49E00A5FB52 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1AC412189F49E00A5FB52 /* AppDelegate.swift */; };
 		56A1AC442189F49E00A5FB52 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A1AC432189F49E00A5FB52 /* ViewController.swift */; };
 		56A1AC472189F49E00A5FB52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A1AC452189F49E00A5FB52 /* Main.storyboard */; };
@@ -17,9 +18,11 @@
 		56AFFBDF2190416400F93723 /* LigandTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AFFBDE2190416400F93723 /* LigandTableViewCell.swift */; };
 		56AFFBE1219043B400F93723 /* data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AFFBE0219043B400F93723 /* data.swift */; };
 		56AFFBE5219044EC00F93723 /* ligands.txt in Resources */ = {isa = PBXBuildFile; fileRef = 56AFFBE4219044EC00F93723 /* ligands.txt */; };
+		56B4DD78219EA89E00B2D428 /* CylinderClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B4DD77219EA89E00B2D428 /* CylinderClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		567F816421943032007F115F /* SceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneViewController.swift; sourceTree = "<group>"; };
 		56A1AC3E2189F49E00A5FB52 /* swifty-protein.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swifty-protein.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A1AC412189F49E00A5FB52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56A1AC432189F49E00A5FB52 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,6 +35,7 @@
 		56AFFBDE2190416400F93723 /* LigandTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LigandTableViewCell.swift; sourceTree = "<group>"; };
 		56AFFBE0219043B400F93723 /* data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = data.swift; sourceTree = "<group>"; };
 		56AFFBE4219044EC00F93723 /* ligands.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ligands.txt; sourceTree = "<group>"; };
+		56B4DD77219EA89E00B2D428 /* CylinderClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CylinderClass.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,8 @@
 				56A1AC452189F49E00A5FB52 /* Main.storyboard */,
 				56A1AC482189F4B100A5FB52 /* Assets.xcassets */,
 				56A1AC4A2189F4B100A5FB52 /* LaunchScreen.storyboard */,
+				567F816421943032007F115F /* SceneViewController.swift */,
+				56B4DD77219EA89E00B2D428 /* CylinderClass.swift */,
 				56A1AC4D2189F4B100A5FB52 /* Info.plist */,
 			);
 			path = "swifty-protein";
@@ -155,8 +161,10 @@
 				56A1AC562189F8F900A5FB52 /* LoginViewController.swift in Sources */,
 				56A1AC442189F49E00A5FB52 /* ViewController.swift in Sources */,
 				56AFFBDF2190416400F93723 /* LigandTableViewCell.swift in Sources */,
+				567F816521943032007F115F /* SceneViewController.swift in Sources */,
 				56AFFBE1219043B400F93723 /* data.swift in Sources */,
 				56A1AC422189F49E00A5FB52 /* AppDelegate.swift in Sources */,
+				56B4DD78219EA89E00B2D428 /* CylinderClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

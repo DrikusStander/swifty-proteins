@@ -61,12 +61,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedLigand = cuurentLigands![indexPath.row]
-        let url = URL(string: "https://files.rcsb.org/ligands/view/" + selectedLigand + "_model.sdf")
+        let url = URL(string: "https://files.rcsb.org/ligands/view/" + selectedLigand + "_ideal.sdf")
         var request = URLRequest(url: url!)
         request.httpMethod = "Get"
+        let activity = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        tableView.addSubview(activity)
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        activity.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+        activity.centerYAnchor.constraint(equalTo: tableView.centerYAnchor).isActive = true
+        
+        activity.startAnimating()
+        
         let task = URLSession.shared.dataTask(with: request){
             (data, response, error) in
+            print("response: ", response)
+            print("data: ", data)
             if error != nil{
+                let alertController = UIAlertController(title: "Error", message: "Problem with request", preferredStyle: UIAlertController.Style.alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
                 print(error!)
             }
             else if let d = data {
@@ -77,27 +90,38 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let connectionCount = Int(countSplit[1])
                 var i : Int = 0;
                 while i < vectorsCount!{
+                    print(responseSplit[i+3])
                     self.vectors.append(responseSplit[i + 3].split(separator: " "))
                     i += 1
                 }
                 i = 0
                 while i < connectionCount!{
+                    print(responseSplit[i + vectorsCount! + 3])
                     self.connections.append(responseSplit[i + vectorsCount! + 3].split(separator: " "))
                     i += 1
                 }
-//                for split in self.vectors{
-//                    print(split)
-//                }
-//                for split in self.connections{
-//                    print(split)
-//                }
                 DispatchQueue.main.async {
                     self.performSegue(withIdentifier: "modelSegue", sender: self)
+                    activity.stopAnimating()
+                    activity.removeFromSuperview()
                 }
                 
             }
         }
         task.resume()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! SceneViewController
+        vc.connections = self.connections
+        vc.vectors = self.vectors
+        self.connections.removeAll()
+        self.vectors.removeAll()
+    }
+    
+    @IBAction func unwindTo(_ sender: UIStoryboardSegue){
+        print("did unwind")
+    }
+    
 }
 

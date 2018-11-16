@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -79,31 +80,64 @@
             </objects>
             <point key="canvasLocation" x="1125.5999999999999" y="-564.46776611694156"/>
         </scene>
-        <!--View Controller-->
+        <!--Model-->
         <scene sceneID="hDK-sS-c9L">
             <objects>
-                <viewController id="7Wo-eX-7wT" sceneMemberID="viewController">
+                <viewController title="Model" id="7Wo-eX-7wT" customClass="SceneViewController" customModule="swifty_protein" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="EwH-Dt-mM0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7u-3N-6cN">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="94.5" width="375" height="572.5"/>
                             </sceneKitView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jse-L0-QRZ">
+                                <rect key="frame" x="0.0" y="74" width="375" height="20.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Selected Element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xwW-Ld-2KO">
+                                        <rect key="frame" x="120.5" y="0.0" width="134" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="x7u-3N-6cN" firstAttribute="centerX" secondItem="UDc-LW-zXw" secondAttribute="centerX" id="4cv-qJ-8Lu"/>
-                            <constraint firstItem="x7u-3N-6cN" firstAttribute="height" secondItem="UDc-LW-zXw" secondAttribute="height" id="DH5-6d-JGj"/>
+                            <constraint firstItem="Jse-L0-QRZ" firstAttribute="trailing" secondItem="UDc-LW-zXw" secondAttribute="trailing" id="5YC-sY-p08"/>
+                            <constraint firstItem="Jse-L0-QRZ" firstAttribute="leading" secondItem="UDc-LW-zXw" secondAttribute="leading" id="9EA-gF-HTp"/>
+                            <constraint firstItem="x7u-3N-6cN" firstAttribute="top" secondItem="Jse-L0-QRZ" secondAttribute="bottom" id="NSB-rh-hV9"/>
+                            <constraint firstItem="Jse-L0-QRZ" firstAttribute="width" secondItem="UDc-LW-zXw" secondAttribute="width" id="Qto-sA-EQ2"/>
+                            <constraint firstItem="UDc-LW-zXw" firstAttribute="bottom" secondItem="x7u-3N-6cN" secondAttribute="bottom" id="YYy-Cp-xgX"/>
+                            <constraint firstItem="Jse-L0-QRZ" firstAttribute="centerX" secondItem="UDc-LW-zXw" secondAttribute="centerX" id="abM-dp-3aD"/>
                             <constraint firstItem="x7u-3N-6cN" firstAttribute="width" secondItem="UDc-LW-zXw" secondAttribute="width" id="bGo-EJ-XQX"/>
-                            <constraint firstItem="x7u-3N-6cN" firstAttribute="centerY" secondItem="UDc-LW-zXw" secondAttribute="centerY" id="ca2-Gg-VZk"/>
+                            <constraint firstItem="Jse-L0-QRZ" firstAttribute="top" secondItem="UDc-LW-zXw" secondAttribute="top" constant="10" id="pEN-Vz-PRe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UDc-LW-zXw"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Model" id="WGG-G7-uSY">
+                        <barButtonItem key="leftBarButtonItem" title="Ligands" id="q4N-jW-x0U">
+                            <connections>
+                                <segue destination="wzr-KO-Vo0" kind="unwind" unwindAction="unwindTo:" id="EPh-v9-giY"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="Q72-iF-gcf">
+                            <connections>
+                                <action selector="shaerBtn:" destination="7Wo-eX-7wT" id="qxF-TK-j4r"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="elementLbl" destination="xwW-Ld-2KO" id="tHp-iy-svR"/>
+                        <outlet property="sceneView" destination="x7u-3N-6cN" id="9yy-h6-wEG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="523-1i-iJG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="wzr-KO-Vo0" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1900" y="-566"/>
+            <point key="canvasLocation" x="1900" y="-566.26686656671666"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xAQ-Ad-W71">
