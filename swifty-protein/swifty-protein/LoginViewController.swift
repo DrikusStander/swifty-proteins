@@ -33,18 +33,14 @@ class LoginViewController: UIViewController {
         self.view.insertSubview(imageView, at: 0)
         
         if #available(iOS 8.0 , iOSMac 10.12.1, *){
-            print("Has correct version")
             if myContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &authError){
-                print("Can Uthenticate")
                 authBtn.isHidden = false
             }
             else{
                 authBtn.isHidden = true
-                print("Can not Uthenticate", authError)
             }
         }
         else{
-            print("Has incorrect version")
             authBtn.isHidden = true
         }
         // Do any additional setup after loading the view.

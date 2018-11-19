@@ -164,7 +164,6 @@ class SceneViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("prepareing for unwind")
         let nodes = gameScene.rootNode.childNodes
         for node in nodes{
             node.removeFromParentNode();

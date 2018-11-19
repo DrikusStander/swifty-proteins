@@ -42,7 +42,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 cuurentLigands = ligands
             }
         }
-
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -74,9 +73,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let task = URLSession.shared.dataTask(with: request){
             (data, response, error) in
-            print("response: ", response)
-            print("data: ", data)
-            if error != nil{
+            var test: HTTPURLResponse
+            test = response as! HTTPURLResponse
+            if test.statusCode != 200{
+                let alertController = UIAlertController(title: "Error", message: "Problem with request", preferredStyle: UIAlertController.Style.alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            else if error != nil{
+                
                 let alertController = UIAlertController(title: "Error", message: "Problem with request", preferredStyle: UIAlertController.Style.alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
                 self.present(alertController, animated: true, completion: nil)
@@ -90,13 +95,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 let connectionCount = Int(countSplit[1])
                 var i : Int = 0;
                 while i < vectorsCount!{
-                    print(responseSplit[i+3])
                     self.vectors.append(responseSplit[i + 3].split(separator: " "))
                     i += 1
                 }
                 i = 0
                 while i < connectionCount!{
-                    print(responseSplit[i + vectorsCount! + 3])
                     self.connections.append(responseSplit[i + vectorsCount! + 3].split(separator: " "))
                     i += 1
                 }
@@ -119,9 +122,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.vectors.removeAll()
     }
     
-    @IBAction func unwindTo(_ sender: UIStoryboardSegue){
-        print("did unwind")
-    }
+    @IBAction func unwindTo(_ sender: UIStoryboardSegue){}
     
 }
 
