@@ -18,7 +18,7 @@ class SceneViewController: UIViewController {
     var cameraNode: SCNNode!
     var targetCreationTime : TimeInterval = 0
     var vectors : [[Substring]]?
-    var connections : [[Substring]]?
+    var connections : [[String]]?
     @IBOutlet weak var elementLbl: UILabel!
     
     @IBAction func shaerBtn(_ sender: Any) {
@@ -139,10 +139,10 @@ class SceneViewController: UIViewController {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = touches.first!
-        let location = touch.location(in: sceneView)
-        let hitResults = sceneView.hitTest(location, options: nil)
-        if let result = hitResults.first{
+            let touch = touches.first!
+            let location = touch.location(in: sceneView)
+            let hitResults = sceneView.hitTest(location, options: nil)
+            if let result = hitResults.first{
             handleTouch(node: result.node)
         }
     }

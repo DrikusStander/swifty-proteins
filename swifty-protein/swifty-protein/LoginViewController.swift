@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboard() 
         let delegate = UIApplication.shared.delegate as! AppDelegate
         delegate.baseController = self
         delegate.navController = self.navigationController
