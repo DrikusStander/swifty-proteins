@@ -43,7 +43,6 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Z02-Sn-HA6" secondAttribute="trailing" constant="300" id="6Iq-ig-idl"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="Z02-Sn-HA6" secondAttribute="bottom" constant="10" id="IHG-C4-DJp"/>
                                                 <constraint firstItem="Z02-Sn-HA6" firstAttribute="top" secondItem="8h1-aA-rnN" secondAttribute="topMargin" constant="10" id="Jdu-Q9-gPc"/>
                                                 <constraint firstItem="Z02-Sn-HA6" firstAttribute="leading" secondItem="8h1-aA-rnN" secondAttribute="leadingMargin" id="oCs-3r-elS"/>
