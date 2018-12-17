@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var ligands : [Substring]?
     var cuurentLigands : [Substring]?
     var vectors : [[Substring]] = []
-    var connections : [[Substring]] = []
+    var connections : [[String]] = []
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +30,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboard() 
         searchBar.delegate = self
         let file = "ligands"
         if let dir = Bundle.main.path(forResource: file, ofType: "txt"){
@@ -90,17 +91,33 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             else if let d = data {
                 let responseString = String(data: d, encoding: String.Encoding.utf8)!
                 let responseSplit = responseString.split(separator: "\n")
-                let countSplit = responseSplit[2].split(separator: " ")
-                let vectorsCount = Int(countSplit[0])
-                let connectionCount = Int(countSplit[1])
+                let tempString = String(responseSplit[2])
+                var startIndex = tempString.startIndex
+                var endIndex = tempString.index(startIndex, offsetBy: 3)
+                let vectorsCount = Int(String(tempString[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " ")))
+                startIndex = tempString.index(tempString.startIndex, offsetBy: 3)
+                endIndex = tempString.index(startIndex, offsetBy: 3)
+                let  connectionCount = Int(String(tempString[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " ")))
                 var i : Int = 0;
                 while i < vectorsCount!{
                     self.vectors.append(responseSplit[i + 3].split(separator: " "))
                     i += 1
                 }
                 i = 0
+                
+
                 while i < connectionCount!{
-                    self.connections.append(responseSplit[i + vectorsCount! + 3].split(separator: " "))
+                    var tempStr = responseSplit[i + vectorsCount! + 3]
+                    startIndex = tempStr.startIndex
+                    endIndex = tempStr.index(startIndex, offsetBy: 3)
+                    let  connection1 = String(tempStr[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " "))
+                    startIndex = tempStr.index(tempStr.startIndex, offsetBy: 3)
+                    endIndex = tempStr.index(startIndex, offsetBy: 3)
+                    let  connection2 = String(tempStr[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " "))
+                    var tempArr : [String] = []
+                    tempArr.append(connection1)
+                    tempArr.append(connection2)
+                    self.connections.append(tempArr)
                     i += 1
                 }
                 DispatchQueue.main.async {
@@ -126,3 +143,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
 }
 
+extension UIViewController {
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
