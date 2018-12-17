@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var cuurentLigands : [Substring]?
     var vectors : [[Substring]] = []
     var connections : [[String]] = []
+    var selectedLigand = ""
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
@@ -60,75 +61,78 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedLigand = cuurentLigands![indexPath.row]
-        let url = URL(string: "https://files.rcsb.org/ligands/view/" + selectedLigand + "_ideal.sdf")
-        var request = URLRequest(url: url!)
-        request.httpMethod = "Get"
-        let activity = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
-        tableView.addSubview(activity)
-        activity.translatesAutoresizingMaskIntoConstraints = false
-        activity.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
-        activity.centerYAnchor.constraint(equalTo: tableView.centerYAnchor).isActive = true
-        
-        activity.startAnimating()
-        
-        let task = URLSession.shared.dataTask(with: request){
-            (data, response, error) in
-            var test: HTTPURLResponse
-            test = response as! HTTPURLResponse
-            if test.statusCode != 200{
-                let alertController = UIAlertController(title: "Error", message: "Problem with request", preferredStyle: UIAlertController.Style.alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-            }
-            else if error != nil{
-                
-                let alertController = UIAlertController(title: "Error", message: "Problem with request", preferredStyle: UIAlertController.Style.alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                print(error!)
-            }
-            else if let d = data {
-                let responseString = String(data: d, encoding: String.Encoding.utf8)!
-                let responseSplit = responseString.split(separator: "\n")
-                let tempString = String(responseSplit[2])
-                var startIndex = tempString.startIndex
-                var endIndex = tempString.index(startIndex, offsetBy: 3)
-                let vectorsCount = Int(String(tempString[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " ")))
-                startIndex = tempString.index(tempString.startIndex, offsetBy: 3)
-                endIndex = tempString.index(startIndex, offsetBy: 3)
-                let  connectionCount = Int(String(tempString[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " ")))
-                var i : Int = 0;
-                while i < vectorsCount!{
-                    self.vectors.append(responseSplit[i + 3].split(separator: " "))
-                    i += 1
+        if selectedLigand == ""
+        {
+            selectedLigand = String(cuurentLigands![indexPath.row])
+            let url = URL(string: "https://files.rcsb.org/ligands/view/" + selectedLigand + "_ideal.sdf")
+            var request = URLRequest(url: url!)
+            request.httpMethod = "Get"
+            let activity = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+            tableView.addSubview(activity)
+            activity.translatesAutoresizingMaskIntoConstraints = false
+            activity.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+            activity.centerYAnchor.constraint(equalTo: tableView.centerYAnchor).isActive = true
+            
+            activity.startAnimating()
+            let task = URLSession.shared.dataTask(with: request){
+                (data, response, error) in
+                var test: HTTPURLResponse
+                test = response as! HTTPURLResponse
+                if test.statusCode != 200{
+                    let alertController = UIAlertController(title: "Error", message: "Problem with request", preferredStyle: UIAlertController.Style.alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
                 }
-                i = 0
-                
+                else if error != nil{
+                    
+                    let alertController = UIAlertController(title: "Error", message: "Problem with request", preferredStyle: UIAlertController.Style.alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.cancel, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                    print(error!)
+                }
+                else if let d = data {
+                    let responseString = String(data: d, encoding: String.Encoding.utf8)!
+                    let responseSplit = responseString.split(separator: "\n")
+                    let tempString = String(responseSplit[2])
+                    var startIndex = tempString.startIndex
+                    var endIndex = tempString.index(startIndex, offsetBy: 3)
+                    let vectorsCount = Int(String(tempString[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " ")))
+                    startIndex = tempString.index(tempString.startIndex, offsetBy: 3)
+                    endIndex = tempString.index(startIndex, offsetBy: 3)
+                    let  connectionCount = Int(String(tempString[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " ")))
+                    var i : Int = 0;
+                    while i < vectorsCount!{
+                        self.vectors.append(responseSplit[i + 3].split(separator: " "))
+                        i += 1
+                    }
+                    i = 0
+                    
 
-                while i < connectionCount!{
-                    var tempStr = responseSplit[i + vectorsCount! + 3]
-                    startIndex = tempStr.startIndex
-                    endIndex = tempStr.index(startIndex, offsetBy: 3)
-                    let  connection1 = String(tempStr[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " "))
-                    startIndex = tempStr.index(tempStr.startIndex, offsetBy: 3)
-                    endIndex = tempStr.index(startIndex, offsetBy: 3)
-                    let  connection2 = String(tempStr[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " "))
-                    var tempArr : [String] = []
-                    tempArr.append(connection1)
-                    tempArr.append(connection2)
-                    self.connections.append(tempArr)
-                    i += 1
+                    while i < connectionCount!{
+                        var tempStr = responseSplit[i + vectorsCount! + 3]
+                        startIndex = tempStr.startIndex
+                        endIndex = tempStr.index(startIndex, offsetBy: 3)
+                        let  connection1 = String(tempStr[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " "))
+                        startIndex = tempStr.index(tempStr.startIndex, offsetBy: 3)
+                        endIndex = tempStr.index(startIndex, offsetBy: 3)
+                        let  connection2 = String(tempStr[startIndex..<endIndex]).trimmingCharacters(in: CharacterSet(charactersIn: " "))
+                        var tempArr : [String] = []
+                        tempArr.append(connection1)
+                        tempArr.append(connection2)
+                        self.connections.append(tempArr)
+                        i += 1
+                    }
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "modelSegue", sender: self)
+                        activity.stopAnimating()
+                        activity.removeFromSuperview()
+                        self.selectedLigand = ""
+                    }
+                    
                 }
-                DispatchQueue.main.async {
-                    self.performSegue(withIdentifier: "modelSegue", sender: self)
-                    activity.stopAnimating()
-                    activity.removeFromSuperview()
-                }
-                
             }
+            task.resume()
         }
-        task.resume()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
